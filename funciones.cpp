@@ -33,8 +33,7 @@ void guardar(){
   int formato;
   cout<<endl<<"Ingrese nombre del archivo a grabar: ";
   cin>>nombre;
-  cout<<endl<<"Ingrese opcion para guardar archivo: "<<endl<<"1 (justificar)"<<endl<<"2 (alinear a la izquierda)"<<endl<<"3 (alinear a la derecha)"<<endl<<"4 (centrar)"<<endl;
-  cin>>formato;
+  
   //objeto para escribir en un archivo
   ofstream archivo(nombre, ios::app); 
   if (archivo.is_open()){
