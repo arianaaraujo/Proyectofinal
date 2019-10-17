@@ -65,7 +65,7 @@ void guardar(){
   opciones();
 }
 void opciones(){
-  cout<<endl<<endl<<"1.	Leer archivo"<<endl<<"2.	Guardar archivo"<<endl<<"7.	Buscar una palabra"<<endl<<"8.	Reemplazar una palabra"<<endl<<"9.	Contar cunatas veces aparece una palabra"<<endl<<"10.	Guardar como PDF";
+  cout<<endl<<endl<<"1.	Leer archivo"<<endl<<"2.	Guardar archivo"<<endl<<"3.	Justificar"<<endl<<"4.	Alinear a la derecha"<<endl<<"5.	Alinear a la izquierda"<<endl<<"6.	Centrar texto"<<endl<<"7.	Buscar una palabra"<<endl<<"8.	Reemplazar una palabra"<<endl<<"9.	Contar cunatas veces aparece una palabra"<<endl<<"10.	Guardar como PDF";
   int opcion;
   cout<<endl<<endl<<"Ingrese opcion (0 para finalizar programa): "; cin>>opcion;
   switch(opcion){
