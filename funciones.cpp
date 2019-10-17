@@ -33,7 +33,7 @@ void guardar(){
   int formato;
   cout<<endl<<"Ingrese nombre del archivo a grabar: ";
   cin>>nombre;
-  
+  /*
   //objeto para escribir en un archivo
   ofstream archivo(nombre, ios::app); 
   if (archivo.is_open()){
@@ -62,6 +62,7 @@ void guardar(){
   else
     cout<<"Archivo no existente"<<endl;
   opciones();
+  */
 }
 void opciones(){
   cout<<endl<<endl<<"1.	Leer archivo"<<endl<<"2.	Guardar archivo"<<endl<<"3.	Justificar"<<endl<<"4.	Alinear a la derecha"<<endl<<"5.	Alinear a la izquierda"<<endl<<"6.	Centrar texto"<<endl<<"7.	Buscar una palabra"<<endl<<"8.	Reemplazar una palabra"<<endl<<"9.	Contar cunatas veces aparece una palabra"<<endl<<"10.	Guardar como PDF";
