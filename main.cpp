@@ -1,6 +1,10 @@
 #include "funciones.h"
+#include <vector>
+#include <iostream>
+using namespace std;
 
 int main () {
-  opciones();
+    vector<vector<string>>texto;
+  opciones(texto);
   return 0;
 }
