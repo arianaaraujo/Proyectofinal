@@ -42,9 +42,9 @@ void leer(vector<vector<string>>&texto){
 
           resultados = split(linea, ' ');
 
-          /*for(int i = 0; i < resultados.size(); i++){
+          for(int i = 0; i < resultados.size(); i++){
               cout << resultados[i] << endl;
-          }*/
+          }
 
           texto.push_back(resultados);
 
