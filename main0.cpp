@@ -4,7 +4,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include <string.h>
-#include "funciones.h"
+#include "funcion.h"
 
 using namespace std;
 
