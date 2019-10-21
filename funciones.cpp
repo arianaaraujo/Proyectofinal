@@ -36,17 +36,18 @@ void leer(vector<vector<string>>&texto){
       while (getline(archivo,linea)){
 
 
-          //cout<<linea<<endl;
+          cout<<linea<<endl;
 
           vector<string> resultados;
 
           resultados = split(linea, ' ');
 
-          for(int i = 0; i < resultados.size(); i++){
+          /*for(int i = 0; i < resultados.size(); i++){
               cout << resultados[i] << endl;
-          }
+          }*/
 
-          texto.push_back(resultados);
+          texto.push_back(resultados)
+          ;
 
       }
       //cierra el archivo
