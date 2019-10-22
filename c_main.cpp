@@ -8,8 +8,8 @@
 using namespace std;
 
 int main() {
-  string doc,cache;
-    ifstream archivo;
+  string doc,cache,cache2;
+  ifstream archivo;
 
   cout<<"---BIENVENIDO AL EDITOR DE TEXTO---"<<endl<<endl;
   do{
@@ -18,6 +18,7 @@ int main() {
   
   }while(archivo.fail());
   cache=leer(doc);
-  opciones(doc,cache);
+  cache2=cache;
+  opciones(doc,cache,cache2);
 
 }
