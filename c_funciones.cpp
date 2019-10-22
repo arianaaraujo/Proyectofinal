@@ -8,7 +8,7 @@ using namespace std;
 
 //Opciones:
 void text(){
-  cout<<"0.  Salir"<<endl<<"1.	Leer archivo"<<endl<<"2.	Guardar archivo"<<endl<<"3.	Justificar"<<endl<<"4.	Alinear a la derecha"<<endl<<"5.	Alinear a la izquierda"<<endl<<"6.	Centrar texto"<<endl<<"7.	Buscar una palabra"<<endl<<"8.	Reemplazar una palabra"<<endl<<"9.	Contar cuántas veces aparece una palabra"<<endl<<"10.	Guardar como PDF"<<endl;    
+  cout<<endl<<"0.  Salir"<<endl<<"1.	Leer archivo"<<endl<<"2.	Guardar archivo"<<endl<<"3.	Justificar"<<endl<<"4.	Alinear a la derecha"<<endl<<"5.	Alinear a la izquierda"<<endl<<"6.	Centrar texto"<<endl<<"7.	Buscar una palabra"<<endl<<"8.	Reemplazar una palabra"<<endl<<"9.	Contar cuántas veces aparece una palabra"<<endl<<"10.	Guardar como PDF"<<endl;    
 }
 
 void guardar(string cache, string texto){
@@ -17,6 +17,7 @@ void guardar(string cache, string texto){
   for (int i=0;i<cache.size();i++){
     archivo<<cache[i];
   }
+  cout<<"ARCHIVO GUARDADO CON EXITO :D!"<<endl<<endl;
 }
 
 string leer(string texto){
@@ -36,7 +37,7 @@ void mostrar(string texto){
        getline(archivo,texto2);
        cout<<texto2<<endl;
      }  archivo.close();}
-    cout<<endl;
+    ;
 }
 
 //Centrar texto
@@ -53,51 +54,38 @@ void centrar(string & texto){
       texto=texto3;}
       
 //Alinear a la derecha
-void derecha(string texto){
-    string texto2;
-    ifstream archivo;
-    //ofstream archivo1;
-    archivo.open(texto,ios::in);
-    //archivo1.open(texto,ios::app);
+void derecha(string &texto){
+    string texto2,texto3;
+    for(int i=0;i<texto.size();i++){
+      texto2+=texto[i];
+      if(texto[i]=='\n'){
+        int a=texto2.size();
+        for(int i=0;i<(80-a);i++){
+          texto3+=" ";}texto3+=texto2;
+         texto2=" ";
+      }}
+      texto=texto3;}
 
-    if(!archivo.fail()){
-      while(!archivo.eof()){
-       getline(archivo,texto2);
-       int a=texto2.size();
-       for(int i=0;i<a;i++){
-         cout<<setw(95)<<right;
-         //archivo1<<setw(90)<<right;
-       }
-       cout<<texto2<<endl;
-     }  archivo.close();}
-    cout<<endl;
-}
 
 //Alinear a la izquierda
 void izquierda(string texto){
-    string texto2;
-    ifstream archivo;
-    //ofstream archivo;
-    archivo.open(texto,ios::in);
-    //archivo.open(texto,ios::app);
+    string texto2,texto3;
+    for(int i=0;i<texto.size();i++){
+      texto2+=texto[i];
+      if(texto[i]=='\n'){
+        int a=texto2.size();
+        for(int i=0;i<(80-a);i++){
+          texto2+=" ";}
+      }}
+      texto2=texto3;}
 
-    if(!archivo.fail()){
-      while(!archivo.eof()){
-       getline(archivo,texto2);
-       int a=texto2.size();
-       for(int i=0;i<a;i++){
-         cout<<left<<setw(90);}
-       cout<<texto2<<endl;
-     }  archivo.close();}
-    cout<<endl;
-}
 void print(string cache){
   for (int i=0;i<cache.size();i++){
     cout<<cache[i];
   }
 }
 
-void opciones(string texto,string cache){
+void opciones(string texto,string cache,string cache2){
   int opcion;
   text();
   cout<<endl<<"Ingresar opción: "; cin>>opcion;cout<<endl;
@@ -107,16 +95,19 @@ void opciones(string texto,string cache){
     cout<<"Hasta luego!"<<endl;break;
     case 1:
     mostrar(texto);
-    opciones(texto,cache);break;
+    opciones(texto,cache,cache2);break;
     case 2:
-    guardar(cache,texto); opciones(texto,cache); break;
+    guardar(cache2,texto); opciones(texto,cache,cache2); break;
     //case 3:
     //justificar(cache);opciones(texto);break;
     case 4:
-    derecha(texto); opciones(texto,cache); break;
+    if (cache2!=cache)cache2=cache;
+    derecha(cache2); print(cache2); opciones(texto,cache,cache2); break;
     case 5:
-    izquierda(texto); opciones(texto,cache); break;
+    if (cache2!=cache)cache2=cache;
+    izquierda(cache2); print(cache2); opciones(texto,cache,cache2); break;
     case 6:
-    centrar(cache); print(cache); opciones(texto,cache);break;  
+    if (cache2!=cache)cache2=cache;
+    centrar(cache2); print(cache2); opciones(texto,cache,cache2);break;  
     }
 }
