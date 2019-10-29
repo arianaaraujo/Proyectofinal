@@ -40,9 +40,7 @@ archivo.open(texto);
                 int extra = e++ < nmod ? 1 : 0;
                 archivo<<matriz[i][j];
                 for(int k=0;k<n+extra;k++) archivo<<" ";
-            }archivo<<endl;}}
-
-cout<<"ARCHIVO GUARDADO CON EXITO :D!"<<endl<<endl;}
+            }archivo<<endl;}}}
 
 vector<string> split(string str, char pattern) {
 
