@@ -21,8 +21,14 @@ int main() {
   
   }while(archivo.fail());
   cache=leer(doc);
-  cache2=cache;
+  cache2=ltrim(cache);
+  if (cache != cache2){guardar_string(cache2,doc);
   cache_vector = leer_vector(doc);
   cache_vector2 = cache_vector;
+  guardar_string(cache,doc);
+  cache=cache2;}
+  else{
+  cache_vector = leer_vector(doc);
+  cache_vector2 = cache_vector;}
   int anterior=100;
   opciones(doc,cache,cache2,cache_vector,cache_vector2,anterior);}
