@@ -8,6 +8,17 @@
 #include "vectores.h"
 using namespace std;
 
+string ltrim(string str){
+  string aux;
+  string linea;
+  for (size_t i=0;i<str.size();i++){
+    linea+=str[i];
+    if (str[i]=='\n'){
+    linea.erase(0,linea.find_first_not_of(" "));
+    aux+=linea; linea="";}}
+
+  return aux;}
+
 //Opciones:
 void text(){
   cout<<endl<<"0.  Salir"<<endl<<"1.	Leer archivo"<<endl<<"2.	Guardar archivo"<<endl<<"3.	Justificar"<<endl<<"4.	Alinear a la derecha"<<endl<<"5.	Alinear a la izquierda"<<endl<<"6.	Centrar texto"<<endl<<"7.	Buscar una palabra"<<endl<<"8.	Reemplazar una palabra"<<endl<<"9.	Contar cuántas veces aparece una palabra"<<endl<<"10.	Guardar como PDF"<<endl;    
@@ -18,13 +29,11 @@ void guardar_string(string cache, string texto){
   archivo.open(texto);
   for (int i=0;i<cache.size();i++){
     archivo<<cache[i];
-  }
-  cout<<"ARCHIVO GUARDADO CON EXITO :D!"<<endl<<endl;
-}
+  }}
 
 string leer(string texto){
   string linea, cache;
-  ifstream file(texto.c_str());
+  ifstream file(texto);
 	while(getline(file,linea))
 		cache+=linea+"\n";
     return cache;
@@ -38,9 +47,7 @@ void mostrar(string texto){
       while(!archivo.eof()){
        getline(archivo,texto2);
        cout<<texto2<<endl;
-     }  archivo.close();}
-    ;
-}
+     }  archivo.close();}}
 
 //Centrar texto
 void centrar(string & texto){
@@ -70,22 +77,19 @@ void derecha(string &texto){
 
 
 //Alinear a la izquierda
-void izquierda(string texto){
-    string texto2,texto3;
+void izquierda(string &texto){
+    string texto2;
     for(int i=0;i<texto.size();i++){
       texto2+=texto[i];
       if(texto[i]=='\n'){
         int a=texto2.size();
         for(int i=0;i<(80-a);i++){
           texto2+=" ";}
-      }}
-      texto2=texto3;}
+      }}}
 
 void print(string cache){
   for (int i=0;i<cache.size();i++){
-    cout<<cache[i];
-  }
-}
+    cout<<cache[i];}}
 
 void opciones(string texto,string cache,string cache2,vector<vector<string>> cache_vector,vector<vector<string>>cache_vector2, int anterior){
   int opcion;
@@ -99,10 +103,11 @@ void opciones(string texto,string cache,string cache2,vector<vector<string>> cac
     mostrar(texto);
     opciones(texto,cache,cache2,cache_vector,cache_vector2,1);break;
     case 2:
-    if(anterior==3){guardar_vector(cache_vector,texto);}
+    if(anterior==3){guardar_vector(cache_vector,texto); cout<<"ARCHIVO GUARDADO CON EXITO :D!"<<endl<<endl;}
     else if(anterior==2){cout<<"ACABAS DE GUARDAR EL TEXTO"<<endl; }
-    else {guardar_string(cache2,texto);}
-    opciones(texto,cache,cache2,cache_vector,cache_vector2,2); break;
+    else {guardar_string(cache2,texto); cout<<"ARCHIVO GUARDADO CON EXITO :D!"<<endl<<endl;}
+    opciones(texto,cache,cache2,cache_vector,cache_vector2,2); 
+    break;
     case 3:
     if (cache_vector2!=cache_vector)cache_vector2=cache_vector;
     justificar(cache_vector2); print_v(cache_vector2); opciones(texto,cache,cache2,cache_vector,cache_vector2,3);break;
