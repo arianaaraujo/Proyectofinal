@@ -1,5 +1,3 @@
-#ifndef PROYECTO_CARCHIVO_H
-#define PROYECTO_CARCHIVO_H
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -10,352 +8,57 @@
 using namespace std;
 
 class CArchivo{
-private:
+  private:
+    int limite;
     string nombre;
     string cache;
     string cache2;
     vector<vector<string>> cache_vector;
     vector<vector<string>> cache_vector2;
 
-public:
-    //lista de opciones
-    void text();
-    //funcion que borra los espacios iniciales
-    string ltrim(string str);
-    //1 muestra lo que este en el archivo guardado
-    void mostrar();
-    //setter para los caches strings
-    void setCache(string &str);
-    //crea vector por linea de archivo
-    vector<string> split(string str, char pattern);
-    //setter para los caches vector
-    void setMatriz (vector<vector<string>> &cache_vector);
-    //3 funcion justificar
-    void justificar(vector<vector<string>>&texto);
-    //6 funcion centrar
-    void centrar(string & texto);
-    //4 funcion derecha
-    void derecha(string &texto);
-    //5 funcion izquierda
-    void izquierda(string &texto);
-    //1 imprime un string
-    void print(string cache);
-    //1 imprime una matriz
-    void print_v(vector<vector<string>>&texto);
-    //2 guarda el archivo a partir de un string
-    void guardar_string(string cache);
-    //2 guarda el archivo a partir de una matriz
-    void guardar_vector(vector<vector<string>>matriz);
-    //8 guarda el archivo a partir de una matriz
-    void guardar3(vector<vector<string>>matriz);
-    //funcion de las opciones
-    void opciones(string nombre, string cache,string cache2,vector<vector<string>> cache_vector,vector<vector<string>> cache_vector2, int anterior);
-    //7 funcion buscar palabra
-    void buscar(vector<vector<string>> texto);
-    //8 funcion reemplazar una palabra
-    void reemplazar(vector<vector<string>> &texto);
-    //9 funcion contar repeticiones de una palabra
-    void contar(vector<vector<string>> texto);
-    //10 funcion guarda en una determinada función
-    void guardar_ext(string cache);
-    //constructor
-    CArchivo(string name);
+  public:
+  //lista de opciones
+  void text();
+  //funcion que borra los espacios iniciales
+  string ltrim(string str);
+  //muestra lo que este en el archivo guardado
+  void mostrar();
+  //setter para los caches strings
+  void setCache(string &str);
+  //crea vector por linea de archivo
+  vector<string> split(string str, char pattern);
+  //setter para los caches vector
+  void setMatriz (vector<vector<string>> &cache_vector);
+  //funcion justificar
+  void justificar(vector<vector<string>>&texto);
+  //funcion centrar
+  void centrar(string & texto,int limite);
+  //funcion derecha
+  void derecha(string &texto,int limite);
+  //funcion izquierda
+  void izquierda(string &texto,int limite);
+  //imprime un string
+  void print(string cache);
+  //imprime una matriz
+  void print_v(vector<vector<string>>&texto);
+  //guarda el archivo a partir de un string
+  void guardar_string(string cache);
+  //guarda el archivo a partir de una matriz
+  void guardar_vector(vector<vector<string>>matriz);
+  //8 guarda el archivo a partir de una matriz
+  void guardar3(vector<vector<string>>matriz);
+  //8 guarda el archivo a partir de una matriz
+  void guardar4(vector<vector<string>>matriz);
+  //7 funcion buscar palabra
+  void buscar(vector<vector<string>> texto);
+  //8 funcion reemplazar una palabra
+  void reemplazar(vector<vector<string>> &texto);
+  //9 funcion contar repeticiones de una palabra
+  void contar(vector<vector<string>> texto);
+  //funcion de las opciones
+  void opciones(string nombre, string cache,string cache2,vector<vector<string>> cache_vector,vector<vector<string>> cache_vector2, int anterior,int limite);
+  //funcion buscar palabra
+  void setMatriz2 (vector<vector<string>> &cache_vector,int limite);
+  //constructor
+  CArchivo(string name, int limite);
 };
-
-
-void CArchivo::text(){
-    cout<<endl<<"0.\tSalir"<<endl<<"1.\tLeer archivo"<<endl<<"2.\tGuardar archivo"<<endl<<"3.\tJustificar"<<endl<<"4.\tAlinear a la derecha"<<endl<<"5.\tAlinear a la izquierda"<<endl<<"6.\tCentrar texto"<<endl<<"7.\tBuscar una palabra"<<endl<<"8.\tReemplazar una palabra"<<endl<<"9.\tContar cuántas veces aparece una palabra"<<endl<<"10.\tGuardar con otra extensión"<<endl;}
-
-string CArchivo::ltrim(string str){
-    string aux;
-    string linea;
-    for (size_t i=0;i<str.size();i++){
-        linea+=str[i];
-        if (str[i]=='\n'){
-            linea.erase(0,linea.find_first_not_of(" "));
-            aux+=linea; linea="";}}
-    return aux;}
-
-void CArchivo::mostrar(){
-    string texto2;
-    ifstream archivo;
-    archivo.open(this->nombre,ios::in);
-    if(!archivo.fail()){
-        while(!archivo.eof()){
-            getline(archivo,texto2);
-            cout<<texto2<<endl;
-        }  archivo.close();}}
-
-void CArchivo::setCache(string &str){
-    string linea;
-    ifstream archivo(this->nombre);
-    while(getline(archivo,linea))
-        str+=linea+"\n";}
-
-vector<string> CArchivo::split(string str, char pattern) {
-    int posInit = 0;
-    int posFound = 0;
-    string splitted;
-    vector<string> resultados;
-
-    while(posFound >= 0){
-        posFound = str.find(pattern, posInit);
-        splitted = str.substr(posInit, posFound - posInit);
-        posInit = posFound + 1;
-        resultados.push_back(splitted);}
-    return resultados;}
-
-void CArchivo::setMatriz (vector<vector<string>> &cache_vector){
-    string linea;
-    ifstream archivo(this->nombre);
-    //abre el archivo y llena la matriz linea por linea
-    {while (getline(archivo,linea)){
-            vector<string> resultados;
-            resultados = split(linea,' ');
-            cache_vector.push_back(resultados);}
-        //cierra el archivo
-        archivo.close();}}
-
-void CArchivo::justificar(vector<vector<string>>&texto){
-    //se calcula la longitud de la cadena mas grande
-    int mayor=0;
-    for(int i=0; i < texto.size();i++){
-        int longitud = 0;
-        for(int j =0; j < texto[i].size(); j++){
-            longitud = longitud + texto[i][j].size() +1;
-        }
-        longitud -= 1;
-        if(longitud > mayor) mayor = longitud;
-    }
-    //Linea por linea
-    for(int i=0; i<texto.size(); i++){
-        //Si solo hay una palabra en la linea, imprimirla
-        if(texto[i].size() == 1){
-            texto[i][0]=texto[i][0];
-        }else{
-            //Longitud de esta linea
-            int longSinEspacios = 0;
-            for(int j=0;j<texto[i].size();j++) longSinEspacios += texto[i][j].size();
-            int longitud = longSinEspacios + texto[i].size() - 1;
-            //Cuantos espacios falta para alcanzar el tamaño de linea mas grande
-            int dif = mayor - longSinEspacios;
-            //Cuantos caracteres en blanco hay que introducir entre cada palabra
-            int n = trunc(float(dif)/(texto[i].size() - 1));
-            int nmod = dif % (texto[i].size() - 1);
-            //palabra por palabra
-            int e = 0;
-            for(int j=0; j<texto[i].size(); j++){
-                //imprimimos los espacios entre palabra
-                int extra = e++ < nmod ? 1 : 0;
-                for(int k=0;k<n+extra;k++) texto[i][j]+=" ";
-            }}}}
-
-void CArchivo::centrar(string & texto){
-    string texto2,texto3;
-    for(int i=0;i<texto.size();i++){
-        texto2+=texto[i];
-        if(texto[i]=='\n'){
-            int a=texto2.size();
-            for(int i=0;i<(40-(a/2));i++){
-                texto3+=" ";}texto3+=texto2;
-            texto2=" ";
-        }}
-    texto=texto3;}
-
-void CArchivo::derecha(string &texto){
-    string texto2,texto3;
-    for(int i=0;i<texto.size();i++){
-        texto2+=texto[i];
-        if(texto[i]=='\n'){
-            int a=texto2.size();
-            for(int i=0;i<(80-a);i++){
-                texto3+=" ";}texto3+=texto2;
-            texto2=" ";
-        }}
-    texto=texto3;}
-
-void CArchivo::izquierda(string &texto){
-    string texto2;
-    for(int i=0;i<texto.size();i++){
-        texto2+=texto[i];
-        if(texto[i]=='\n'){
-            int a=texto2.size();
-            for(int i=0;i<(80-a);i++){
-                texto2+=" ";}
-        }}}
-
-void CArchivo::print(string cache){
-    for (int i=0;i<cache.size();i++){
-        cout<<cache[i];}}
-
-void CArchivo::print_v(vector<vector<string>>&texto){
-    for(const auto &linea:texto){
-        for(const auto &palabra:linea){
-            cout<<palabra;
-        }cout<<endl;}}
-
-void CArchivo::guardar_string(string cache){
-    ofstream archivo;
-    archivo.open(this->nombre);
-    for (int i=0;i<cache.size();i++){
-        archivo<<cache[i];}}
-
-void CArchivo::guardar_ext(string cache){
-    ofstream archivo;
-    string ext;
-    cout<<"Extensión del archivo (.doc,.ppt,etc.): ";cin>>ext;
-    cout<<"El archivo se guardará como 'texto.ext' ."<<endl;
-
-    if(ext==".doc" || ext=="doc" || ext==".DOC" || ext=="DOC"){
-        archivo.open("texto.doc");
-        if(archivo.is_open()){
-        for (int i=0;i<cache.size();i++){
-            archivo<<cache[i];}}}
-
-    if(ext==".ppt" || ext=="ppt" || ext==".PPT" || ext=="PPT"){
-        archivo.open("texto.ppt");
-        if(archivo.is_open()){
-            for (int i=0;i<cache.size();i++){
-                archivo<<cache[i];}}}
-
-}
-
-void CArchivo::guardar3(vector<vector<string>>matriz){
-    ofstream archivo;
-    archivo.open(this->nombre);
-    string cache;
-    for(int i=0; i<matriz.size(); i++){
-        for(int j=0; j<matriz[i].size(); j++){
-            archivo<<matriz[i][j]<<" "; cache=cache+matriz[i][j]+" ";
-        }archivo<<endl;cache+="\n";}
-    opciones(nombre,cache,cache,matriz,matriz,8);
-}
-
-void CArchivo::guardar_vector(vector<vector<string>>matriz){
-    ofstream archivo;
-    archivo.open(this->nombre);
-    //se calcula la longitud de la cadena mas grande
-    int mayor=0;
-    for(int i=0; i < matriz.size();i++){
-        int longitud = 0;
-        for(int j =0; j < matriz[i].size(); j++){
-            longitud = longitud + matriz[i][j].size() +1;
-        }
-        longitud -= 1;
-        if(longitud > mayor) mayor = longitud;
-    }
-    //Linea por linea
-    for(int i=0; i<matriz.size(); i++){
-        //Si solo hay una palabra en la linea, imprimirla
-        if(matriz[i].size() == 1){
-            archivo<<matriz[i][0];}
-        else{//Longitud de esta linea
-            int longSinEspacios = 0;
-            for(int j=0;j<matriz[i].size();j++) longSinEspacios += matriz[i][j].size();
-            int longitud = longSinEspacios + matriz[i].size() - 1;
-            //Cuantos espacios falta para alcanzar el tamaño de linea mas grande
-            int dif = mayor - longSinEspacios;
-            //Cuantos caracteres en blanco hay que introducir entre cada palabra
-            int n = trunc(float(dif)/(matriz[i].size() - 1));
-            int nmod = dif % (matriz[i].size() - 1);
-            //palabra por palabra
-            int e = 0;
-            for(int j=0; j<matriz[i].size(); j++){
-
-                int extra = e++ < nmod ? 1 : 0;
-                archivo<<matriz[i][j];
-                for(int k=0;k<n+extra;k++) archivo<<" ";
-            }archivo<<endl;}}}
-
-void CArchivo::buscar(vector<vector<string>> texto){
-    string busq;
-    int cont=0;
-    cout<<"Ingrese palabra a buscar: "; cin>>busq;
-    for(int i=0; i < texto.size();i++){
-        for(int j =0; j < texto[i].size(); j++){
-            if(texto[i][j]==busq){
-                cout<<endl<<"    Palabra encontrada en la linea "<<i+1<<", "<<j+1<<"° posicion."<<endl;
-                cont++;}
-        }}
-    if(cont==0) cout<<endl<<"   Palabra no encontrada"<<endl;}
-
-void CArchivo::reemplazar(vector<vector<string>> &texto){
-    string busq,reem;
-    int cont=0;
-    cout<<"Ingrese palabra a reemplazar: "; cin>>busq;
-    cout<<"Con qué lo vas a reemplazar: "; cin>>reem;
-
-    for(int i=0; i < texto.size();i++){
-        for(int j =0; j < texto[i].size(); j++){
-            if(texto[i][j]==busq){
-                texto[i][j]=reem;
-                cont++;
-            }}}
-    if(cont==0) cout<<endl<<"Esa palabra no existe en el texto"<<endl;
-    else cout<<endl<<"Se terminó de reemplazar la palabra '"<<busq<<"' por '"<<reem<<"'. "<<endl;}
-
-void CArchivo::contar(vector<vector<string>> texto){
-    string busq;
-    int cont=0;
-    cout<<"Ingrese palabra a buscar: "; cin>>busq;
-    for(int i=0; i < texto.size();i++){
-        for(int j =0; j < texto[i].size(); j++){
-            if(texto[i][j]==busq){cont++;}}}
-    cout<<endl<<"Numero de incidencias: "<<cont<<endl;}
-
-void CArchivo::opciones(string nombre, string cache,string cache2,vector<vector<string>> cache_vector,vector<vector<string>> cache_vector2, int anterior){
-    int opcion;
-    text();
-    cout<<endl<<"Ingresar opción: "; cin>>opcion;cout<<endl;
-
-    switch(opcion){
-        case 0:
-            cout<<"Hasta luego!"<<endl;break;
-        case 1:
-            mostrar();
-            opciones(nombre,cache,cache2,cache_vector,cache_vector2,1);break;
-        case 2:
-            if(anterior==3){guardar_vector(cache_vector); cout<<"ARCHIVO GUARDADO CON EXITO :D!"<<endl<<endl;}
-            else if(anterior==2){cout<<"ACABAS DE GUARDAR EL TEXTO"<<endl; }
-            else {guardar_string(cache2); cout<<"ARCHIVO GUARDADO CON EXITO :D!"<<endl<<endl;}
-            opciones(nombre,cache,cache2,cache_vector,cache_vector2,2);
-            break;
-        case 3:
-            if (cache_vector2!=cache_vector)cache_vector2=cache_vector;
-            justificar(cache_vector2); print_v(cache_vector2); opciones(nombre,cache,cache2,cache_vector,cache_vector2,3);break;
-        case 4:
-            if (cache2!=cache)cache2=cache;
-            derecha(cache2); print(cache2); opciones(nombre,cache,cache2,cache_vector,cache_vector2,4); break;
-        case 5:
-            if (cache2!=cache)cache2=cache;
-            izquierda(cache2); print(cache2); opciones(nombre,cache,cache2,cache_vector,cache_vector2,5); break;
-        case 6:
-            if (cache2!=cache)cache2=cache;
-            centrar(cache2); print(cache2); opciones(nombre,cache,cache2,cache_vector,cache_vector2,6);break;
-        case 7:
-            buscar(cache_vector); opciones(nombre,cache,cache2,cache_vector,cache_vector2,7);break;
-        case 8:
-            reemplazar(cache_vector); guardar3(cache_vector); break;
-        case 9:
-            contar(cache_vector); opciones(nombre,cache,cache2,cache_vector,cache_vector2,9);break;
-        case 10:
-            if (cache2!=cache)cache2=cache;
-            guardar_ext(cache2);cout<<"Se guardó correctamente, revise sus archivos."<<endl; opciones(nombre,cache,cache2,cache_vector,cache_vector2,10); break;
-    }}
-
-CArchivo::CArchivo(string name){
-    nombre=name;
-    setCache(cache);
-    cache2 = ltrim(cache);
-    if (cache != cache2){
-        guardar_string(cache2);
-        setMatriz(cache_vector);
-        setMatriz(cache_vector2);
-        guardar_string(cache);
-        cache=cache2;}
-    else{
-        setMatriz(cache_vector);
-        setMatriz(cache_vector2);}
-    int anterior=100;
-    opciones(this->nombre, this->cache,this->cache2,this->cache_vector,this->cache_vector2, anterior);}
-#endif //PROYECTO_CARCHIVO_H
