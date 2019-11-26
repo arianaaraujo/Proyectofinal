@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProyectoPOO", "ProyectoPOO.vcxproj", "{8990600A-94A9-44EE-9928-EA01E69EB8DF}"
+EndProject
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "Proyecto", "..\..\UTEC\2019-2\POO\Proyecto\cmake-build-debug\Proyecto.exe", "{7072909F-6FDD-4DD0-935A-FF2910EF76E5}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = C:\Users\Francesca\Desktop\UTEC\2019-2\POO\Proyecto\cmake-build-debug\Proyecto.exe
+		RemoteMachine = PC
+		StartingDirectory = C:\Users\Francesca\Desktop\UTEC\2019-2\POO\Proyecto\cmake-build-debug
+		Environment = Predeterminado
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8990600A-94A9-44EE-9928-EA01E69EB8DF}.Debug|x64.ActiveCfg = Debug|x64
+		{8990600A-94A9-44EE-9928-EA01E69EB8DF}.Debug|x64.Build.0 = Debug|x64
+		{8990600A-94A9-44EE-9928-EA01E69EB8DF}.Debug|x86.ActiveCfg = Debug|Win32
+		{8990600A-94A9-44EE-9928-EA01E69EB8DF}.Debug|x86.Build.0 = Debug|Win32
+		{8990600A-94A9-44EE-9928-EA01E69EB8DF}.Release|x64.ActiveCfg = Release|x64
+		{8990600A-94A9-44EE-9928-EA01E69EB8DF}.Release|x64.Build.0 = Release|x64
+		{8990600A-94A9-44EE-9928-EA01E69EB8DF}.Release|x86.ActiveCfg = Release|Win32
+		{8990600A-94A9-44EE-9928-EA01E69EB8DF}.Release|x86.Build.0 = Release|Win32
+		{7072909F-6FDD-4DD0-935A-FF2910EF76E5}.Debug|x64.ActiveCfg = Release|x86
+		{7072909F-6FDD-4DD0-935A-FF2910EF76E5}.Debug|x86.ActiveCfg = Release|x86
+		{7072909F-6FDD-4DD0-935A-FF2910EF76E5}.Release|x64.ActiveCfg = Release|x86
+		{7072909F-6FDD-4DD0-935A-FF2910EF76E5}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17E3EDA3-247C-4581-9117-7BE13BDB93C3}
+	EndGlobalSection
+EndGlobal
